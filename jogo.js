@@ -69,6 +69,9 @@ const planodefundo = {
 
     desenha() {
 
+        contexto.fillStyle = '#06aaff';
+        contexto.fillRect(0, 0, canvas.width, canvas.height);
+
         contexto.drawImage(
             sprites,
             planodefundo.spriteX, planodefundo.spriteY, //Sprite X, Sprite Y
@@ -90,11 +93,13 @@ const planodefundo = {
 
 function loop() {
 
-    flappyBird.desenha();
+    planodefundo.desenha();
 
     chao.desenha();
 
-    planodefundo.desenha();
+    flappyBird.desenha();
+
+    flappyBird.y = flappyBird.y + 1;
 
     requestAnimationFrame(loop);
 
