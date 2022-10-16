@@ -7,28 +7,6 @@ const canvas = document.querySelector('canvas');
 const contexto = canvas.getContext('2d');
 
 
-// [Pássaro]
-const flappyBird = {
-    spriteX: 0,
-    spriteY: 0,
-    largura: 33,
-    altura: 24,
-    x: 10,
-    y: 50,
-
-    desenha() {
-
-        contexto.drawImage(
-            sprites,
-            flappyBird.spriteX, flappyBird.spriteY, //Sprite X, Sprite Y
-            flappyBird.largura, flappyBird.altura, //Tamanho do recorte na Sprite
-            flappyBird.x, flappyBird.y, //Posição dentro do canvas
-            flappyBird.largura, flappyBird.altura //Tamanho dentro do canvas
-        );
-    }
-}
-
-
 //[Chão]
 const chao = {
     spriteX: 0,
@@ -91,16 +69,44 @@ const planodefundo = {
     }
 }
 
+// [Pássaro]
+const flappyBird = {
+    spriteX: 0,
+    spriteY: 0,
+    largura: 33,
+    altura: 24,
+    x: 10,
+    y: 50,
+
+    atualiza(){
+
+        flappyBird.y = flappyBird.y + 1;
+
+    },
+
+    desenha() {
+
+        contexto.drawImage(
+            sprites,
+            flappyBird.spriteX, flappyBird.spriteY, //Sprite X, Sprite Y
+            flappyBird.largura, flappyBird.altura, //Tamanho do recorte na Sprite
+            flappyBird.x, flappyBird.y, //Posição dentro do canvas
+            flappyBird.largura, flappyBird.altura //Tamanho dentro do canvas
+        );
+    }
+}
+
+
 function loop() {
+    
+    flappyBird.atualiza();
 
     planodefundo.desenha();
 
     chao.desenha();
 
     flappyBird.desenha();
-
-    flappyBird.y = flappyBird.y + 1;
-
+    
     requestAnimationFrame(loop);
 
 }
