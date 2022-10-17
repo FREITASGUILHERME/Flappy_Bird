@@ -36,6 +36,7 @@ const chao = {
     }
 };
 
+
 //  [Plano de Fundo]
 const planodefundo = {
     spriteX: 390,
@@ -68,6 +69,7 @@ const planodefundo = {
         );
     }
 };
+
 
 //  [Pássaro]
 const flappyBird = {
@@ -143,12 +145,14 @@ const telas = {
             flappyBird.desenha();
             mensagemgetredy.desenha();
         },
+        click() {
+            mudaParaTela(telas.JOGO);
+        },
         atualiza() {
 
         }
     }
 };
-
 
 telas.JOGO = {
     desenha() {
@@ -173,6 +177,14 @@ function loop() {
 }
 
 
+//  [Obtendo o Click do Usuário]
+window.addEventListener('click', function(){
+    if(telaAtiva.click){
+        telaAtiva.click();
+    }
+});
 
+
+//  [Chamada das Funções]
 mudaParaTela(telas.INICIO);
 loop();
