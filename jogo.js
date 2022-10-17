@@ -77,10 +77,13 @@ const flappyBird = {
     altura: 24,
     x: 10,
     y: 50,
+    gravidade: 0.25,
+    velocidade: 0,
 
     atualiza(){
+        flappyBird.velocidade = flappyBird.velocidade + flappyBird.gravidade;
 
-        flappyBird.y = flappyBird.y + 1;
+        flappyBird.y = flappyBird.y + flappyBird.velocidade;
 
     },
 
