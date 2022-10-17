@@ -7,7 +7,7 @@ const canvas = document.querySelector('canvas');
 const contexto = canvas.getContext('2d');
 
 
-//[Chão]
+//  [Chão]
 const chao = {
     spriteX: 0,
     spriteY: 610,
@@ -34,9 +34,9 @@ const chao = {
             chao.largura, chao.altura //Tamanho dentro do canvas
         );
     }
-}
+};
 
-// [Plano de Fundo]
+//  [Plano de Fundo]
 const planodefundo = {
     spriteX: 390,
     spriteY: 0,
@@ -67,9 +67,9 @@ const planodefundo = {
             planodefundo.largura, planodefundo.altura //Tamanho dentro do canvas
         );
     }
-}
+};
 
-// [Pássaro]
+//  [Pássaro]
 const flappyBird = {
     spriteX: 0,
     spriteY: 0,
@@ -97,21 +97,82 @@ const flappyBird = {
             flappyBird.largura, flappyBird.altura //Tamanho dentro do canvas
         );
     }
+};
+
+
+//  [Tela de Início]
+const mensagemgetredy = {
+
+    sX: 134,
+    sY: 0,
+    w: 174,
+    h: 152,
+    x: (canvas.width / 2) - 174 / 2,
+    y: 50,
+
+    desenha() {
+
+        contexto.drawImage(
+            sprites,
+            mensagemgetredy.sX, mensagemgetredy.sY,
+            mensagemgetredy.w, mensagemgetredy.h,
+            mensagemgetredy.x, mensagemgetredy.y,
+            mensagemgetredy.w, mensagemgetredy.h
+        );
+
+    }
+
+};
+
+
+
+//  [Telas]
+let telaAtiva = {
+
+};
+
+function mudaParaTela(novaTela){
+    telaAtiva = novaTela;
 }
 
+const telas = {
+    INICIO: {
+        desenha() {
+            planodefundo.desenha();
+            chao.desenha();
+            flappyBird.desenha();
+            mensagemgetredy.desenha();
+        },
+        atualiza() {
 
+        }
+    }
+};
+
+
+telas.JOGO = {
+    desenha() {
+        planodefundo.desenha();
+        chao.desenha();
+        flappyBird.desenha();        
+    },
+    atualiza() {
+        flappyBird.atualiza();
+    }
+};
+
+
+//  [Loops]
 function loop() {
-    
-    flappyBird.atualiza();
-
-    planodefundo.desenha();
-
-    chao.desenha();
-
-    flappyBird.desenha();
-    
+   
+    telaAtiva.desenha();
+    telaAtiva.atualiza();
+   
     requestAnimationFrame(loop);
 
 }
 
+
+
+mudaParaTela(telas.INICIO);
 loop();
