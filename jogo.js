@@ -1,4 +1,9 @@
+//  [Audios]
+const somHitchao = new Audio();
+somHitchao.src = './Efeitos/hit.wav'
 
+const somPulo = new Audio();
+somPulo.src = './Efeitos/pulo.wav'
 
 const sprites = new Image();
 sprites.src = './sprites.png';
@@ -77,7 +82,6 @@ function fazColisao(flappyBird, chao) {
 
     if(flappyBirdY >= chaoY) {
 
-        mudaParaTela(telas.INICIO);
         return true;
     }
 
@@ -95,6 +99,7 @@ function criaflappyBird() {
         y: 50,
         pulo: 4.6,
         pula() {
+            somPulo.play();
             flappyBird.velocidade = - flappyBird.pulo;
         },
         gravidade: 0.25,
@@ -103,6 +108,10 @@ function criaflappyBird() {
         atualiza(){
             if(fazColisao(flappyBird, chao)){
                 console.log('Fez colisao');
+
+                somHitchao.play();
+
+                mudaParaTela(telas.INICIO);
                 return;
             }
     
@@ -201,6 +210,7 @@ telas.JOGO = {
         globais.flappyBird.desenha();        
     },
     click(){
+
         globais.flappyBird.pula();
     },
     atualiza() {
