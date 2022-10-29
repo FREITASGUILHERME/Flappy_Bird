@@ -13,34 +13,43 @@ const contexto = canvas.getContext('2d');
 
 
 //  [Chão]
-const chao = {
-    spriteX: 0,
-    spriteY: 610,
-    largura: 224,
-    altura: 112,
-    x: 0,
-    y: canvas.height - 112,
-
-    desenha() {
-
-        contexto.drawImage(
-            sprites,
-            chao.spriteX, chao.spriteY, //Sprite X, Sprite Y
-            chao.largura, chao.altura, //Tamanho do recorte na Sprite
-            chao.x, chao.y, //Posição dentro do canvas
-            chao.largura, chao.altura //Tamanho dentro do canvas
-        );
-
-        contexto.drawImage(
-            sprites,
-            chao.spriteX, chao.spriteY, //Sprite X, Sprite Y
-            chao.largura, chao.altura, //Tamanho do recorte na Sprite
-            (chao.x + chao.largura), chao.y, //Posição dentro do canvas
-            chao.largura, chao.altura //Tamanho dentro do canvas
-        );
-    }
-};
-
+function criaChao(){
+    const chao = {
+        spriteX: 0,
+        spriteY: 610,
+        largura: 224,
+        altura: 112,
+        x: 0,
+        y: canvas.height - 112,
+        atualiza() {
+            const movimentoDoChao = 1;
+            const repeteEm = chao.largura / 2;
+            const movimentacao = chao.x - movimentoDoChao;
+            
+            chao.x = movimentacao % repeteEm;
+        },
+        desenha() {
+    
+            contexto.drawImage(
+                sprites,
+                chao.spriteX, chao.spriteY, //Sprite X, Sprite Y
+                chao.largura, chao.altura, //Tamanho do recorte na Sprite
+                chao.x, chao.y, //Posição dentro do canvas
+                chao.largura, chao.altura //Tamanho dentro do canvas
+            );
+    
+            contexto.drawImage(
+                sprites,
+                chao.spriteX, chao.spriteY, //Sprite X, Sprite Y
+                chao.largura, chao.altura, //Tamanho do recorte na Sprite
+                (chao.x + chao.largura), chao.y, //Posição dentro do canvas
+                chao.largura, chao.altura //Tamanho dentro do canvas
+            );
+        },
+    };
+    
+    return chao;
+}
 
 //  [Plano de Fundo]
 const planodefundo = {
@@ -187,10 +196,11 @@ const telas = {
     INICIO: {
         inicializa(){
             globais.flappyBird = criaflappyBird();
+            globais.chao = criaChao();
         },
         desenha() {
             planodefundo.desenha();
-            chao.desenha();
+            globais.chao.desenha();
             globais.flappyBird.desenha();
             mensagemgetredy.desenha();
         },
@@ -198,7 +208,7 @@ const telas = {
             mudaParaTela(telas.JOGO);
         },
         atualiza() {
-
+            globais.chao.atualiza();
         }
     }
 };
