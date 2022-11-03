@@ -29,7 +29,6 @@ function criaChao(){
             chao.x = movimentacao % repeteEm;
         },
         desenha() {
-    
             contexto.drawImage(
                 sprites,
                 chao.spriteX, chao.spriteY, //Sprite X, Sprite Y
@@ -115,7 +114,7 @@ function criaflappyBird() {
         velocidade: 0,
     
         atualiza(){
-            if(fazColisao(flappyBird, chao)){
+            if(fazColisao(flappyBird, globais.chao)){
                 console.log('Fez colisao');
 
                 somHitchao.play();
@@ -129,12 +128,17 @@ function criaflappyBird() {
             flappyBird.y = flappyBird.y + flappyBird.velocidade;
     
         },
-    
+        movimento: [
+            {spriteX: 0, spriteY: 0,},
+            {spriteX: 0, spriteY: 26,},
+            {spriteX: 0, spriteY: 52,}
+        ],        
         desenha() {
-    
+            
+            const { spriteX, spriteY } = flappyBird.movimento[2];
             contexto.drawImage(
                 sprites,
-                flappyBird.spriteX, flappyBird.spriteY, //Sprite X, Sprite Y
+                spriteX, spriteY, //Sprite X, Sprite Y
                 flappyBird.largura, flappyBird.altura, //Tamanho do recorte na Sprite
                 flappyBird.x, flappyBird.y, //Posição dentro do canvas
                 flappyBird.largura, flappyBird.altura //Tamanho dentro do canvas
@@ -216,7 +220,7 @@ const telas = {
 telas.JOGO = {
     desenha() {
         planodefundo.desenha();
-        chao.desenha();
+        globais.chao.desenha();
         globais.flappyBird.desenha();        
     },
     click(){
