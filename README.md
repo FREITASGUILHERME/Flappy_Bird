@@ -25,5 +25,5 @@ Esse projeto não possui um sistema de versionamento.
 <h2 align="center">Licença do Projeto</h2>
 
 <p align="center">
-[MIT License] (./LICENSE.md) © [Mario Souto] (http://mariosouto.com/)
+[MIT License] (./LICENSE.md) © [Guilherme Freitas] (https://freitasguilherme.github.io/Sobre-Mim/)
 </p> 
